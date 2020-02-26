@@ -72,19 +72,23 @@ class DeliveryController {
 
     const { email } = req.body;
 
-    const delivery = await Delivery.findByPk(req.userId);
+    const delivery = await Delivery.findByPk(req.params.id);
     
     if(email !== delivery.email) {
-      const deliveryExist = await Delivery.findOne({ where: { email }});
+      const deliveryExist = await Delivery.findOne({ where: { email: req.email }});
 
       if(deliveryExist){
         return res.status(400).json({error: 'Delivery email already exist.'})
       }
     }
 
-    const { id, name } = await delivery.update(req.body);
+    const { id, name, avatar_id } = await delivery.update(req.body);
 
-    return res.json({ id, name });
+    return res.json({ 
+      id,
+      name,
+      avatar_id, 
+    });
 
   }
 }
