@@ -60,7 +60,7 @@ class DeliveryController {
   async update(req, res) {
     const schema = Yup.object().shape({
     name: Yup.string().required(),
-    email: Yup.string().required().email(),
+    email: Yup.string().email(),
     avatar_id: Yup.number().required(),
     });
 
@@ -70,17 +70,17 @@ class DeliveryController {
       return res.status(400).json({ error: 'Validation error' });
     }
 
-    //const { email } = req.body;
+    const { email } = req.body;
 
     const delivery = await Delivery.findByPk(req.userId);
     
-    //if(email !== delivery.email) {
-    //  const deliveryExist = await Delivery.findOne({ where: { email }});
-//
-    //  if(deliveryExist){
-    //    return res.status(400).json({error: 'Delivery email already exist.'})
-    //  }
-    //}
+    if(email !== delivery.email) {
+      const deliveryExist = await Delivery.findOne({ where: { email }});
+
+      if(deliveryExist){
+        return res.status(400).json({error: 'Delivery email already exist.'})
+      }
+    }
 
     const { id, name } = await delivery.update(req.body);
 
