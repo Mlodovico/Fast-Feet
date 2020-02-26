@@ -91,6 +91,17 @@ class DeliveryController {
     });
 
   }
+
+  async delete(req, res) {
+    const delivery = await Delivery.findByPk(req.params.id);
+
+    console.log('check delete route');
+
+    delivery.destroy(req.body);
+    delivery.save();
+
+    return res.json(delivery);
+  }
 }
 
 export default new DeliveryController();

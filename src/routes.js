@@ -28,10 +28,10 @@ routes.put('/users/:id', UserController.update);
 routes.post('/deliverys', DeliveryController.store);
 routes.get('/deliverys', DeliveryController.index);
 routes.put('/deliverys/:id', DeliveryController.update);
+routes.delete('/deliverys/:id', DeliveryController.delete);
 
 /**
  * routes.put('/deliverys/:id', DeliveryController.update);
- * routes.delete('/deliverys/:id', DeliveryController.delete);
  */
 
  routes.post('/files', upload.single('file'), FileController.store);
