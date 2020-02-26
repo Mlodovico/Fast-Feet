@@ -1,5 +1,5 @@
-import Recipient from '../models/Recipients';
-import User from '../models/Users';
+import Recipient from '../models/Recipient';
+import User from '../models/User';
 
 import * as Yup from 'yup';
 

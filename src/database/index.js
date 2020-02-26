@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize';
 
-import User from '../app/models/Users';
-import Recipient from '../app/models/Recipients';
-import File from '../app/models/Files';
-import Delivery from '../app/models/Deliverys';
+import User from '../app/models/User';
+import Recipient from '../app/models/Recipient';
+import File from '../app/models/File';
+import Delivery from '../app/models/Delivery';
 
 
 import databaseConfig from '../config/database';
@@ -20,7 +20,7 @@ class Database {
     
     models
         .map(model => model.init(this.connection))
-        .map(model => models.associate && models.associate(this.connection.models));
+        .map(model => model.associate && model.associate(this.connection.models));
   }
 
 }

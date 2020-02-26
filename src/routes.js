@@ -27,7 +27,7 @@ routes.put('/users/:id', UserController.update);
 
 routes.post('/deliverys', DeliveryController.store);
 routes.get('/deliverys', DeliveryController.index);
-routes.put('/deliverys/:id', DeliveryController.update);
+routes.put('/deliverys', DeliveryController.update);
 
 /**
  * routes.put('/deliverys/:id', DeliveryController.update);

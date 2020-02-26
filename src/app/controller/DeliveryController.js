@@ -1,5 +1,5 @@
-import Delivery from  '../models/Deliverys';
-import File from '../models/Files';
+import Delivery from  '../models/Delivery';
+import File from '../models/File';
 
 import * as Yup from 'yup';
 
@@ -70,21 +70,21 @@ class DeliveryController {
       return res.status(400).json({ error: 'Validation error' });
     }
 
-    const { email } = req.body;
+    //const { email } = req.body;
 
     const delivery = await Delivery.findByPk(req.userId);
     
-    if(email !== delivery.email) {
-      const deliveryExist = await Delivery.findOne({ where: { email }});
-
-      if(deliveryExist){
-        return res.status(400).json({error: 'Delivery email already exist.'})
-      }
-    }
+    //if(email !== delivery.email) {
+    //  const deliveryExist = await Delivery.findOne({ where: { email }});
+//
+    //  if(deliveryExist){
+    //    return res.status(400).json({error: 'Delivery email already exist.'})
+    //  }
+    //}
 
     const { id, name } = await delivery.update(req.body);
 
-    return res.json( { email_enviado: email } );
+    return res.json({ id, name });
 
   }
 }
