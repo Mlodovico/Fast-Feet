@@ -6,6 +6,7 @@ import SessionController from './app/controller/SessionController';
 import RecipientController from './app/controller/RecipientController';
 import DeliveryController from './app/controller/DeliveryController';
 import FileController from './app/controller/FileController';
+import OrderController from './app/controller/OrderController';
 
 import authMiddleware from './app/middleware/auth';
 import multerConfig from './config/multer';
@@ -30,9 +31,11 @@ routes.get('/deliverys', DeliveryController.index);
 routes.put('/deliverys/:id', DeliveryController.update);
 routes.delete('/deliverys/:id', DeliveryController.delete);
 
-/**
- * routes.put('/deliverys/:id', DeliveryController.update);
- */
+routes.post('/orders', OrderController.store);
+routes.get('/orders', OrderController.index);
+routes.put('/orders/:id', OrderController.update);
+routes.delete('/orders/:id', OrderController.delete);
+
 
  routes.post('/files', upload.single('file'), FileController.store);
 
