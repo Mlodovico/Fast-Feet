@@ -24,7 +24,6 @@ module.exports = {
         allowNull: true,
       },
       signature_id: {
-        allowNull: false,
         type: Sequelize.INTEGER,
       },
       product: {
@@ -46,7 +45,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      update_at: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
