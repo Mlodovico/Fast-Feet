@@ -17,10 +17,7 @@ class OrderController {
       return res.status(400).json({ error: "Validation error"});
     }
 
-    const { recipient_id,
-            deliveryman_id, 
-          } = req.body;
-
+    const { recipient_id, deliveryman_id } = req.body;
     /**
      * Check if recipient_id is a recipient
      */
@@ -42,12 +39,16 @@ class OrderController {
     const isDelivery = await Delivery.findOne({
       where: { id: deliveryman_id }
     });
-
+    console.log(isDelivery)
     if(!isDelivery) {
       return res.status(400).json({ 
         error: "This deliveryman id do not match with anyone"
       });
     }
+
+    /**
+     * Diminuir variaveis de requisição
+     */
 
     const order = await Order.create({
       recipient_id: req.body.recipient_id,
@@ -62,11 +63,6 @@ class OrderController {
 
     return res.json({ ok: true });
   }
-  
-  async update(req, res) {
-    return res.json({ ok: true });
-  }
-
 
   async delete(req, res) {
     return res.json({ ok: true });

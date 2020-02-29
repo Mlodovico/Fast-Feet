@@ -17,6 +17,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      avatar_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       created_at:{
         type: Sequelize.DATE,
         allowNull: false,

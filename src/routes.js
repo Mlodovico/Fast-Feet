@@ -7,6 +7,9 @@ import RecipientController from './app/controller/RecipientController';
 import DeliveryController from './app/controller/DeliveryController';
 import FileController from './app/controller/FileController';
 import OrderController from './app/controller/OrderController';
+import StartOfDay from './app/controller/StartDateDeliveryController';
+import EndOfDay from './app/controller/EndDateDeliveryController';
+
 
 import authMiddleware from './app/middleware/auth';
 import multerConfig from './config/multer';
@@ -33,9 +36,10 @@ routes.delete('/deliverys/:id', DeliveryController.delete);
 
 routes.post('/orders', OrderController.store);
 routes.get('/orders', OrderController.index);
-routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
 
+routes.put('/orders/startday/:delivery_id/:deliveryman_id', StartOfDay.update);
+routes.put('/orders/endday/:delivery_id/:deliveryman_id', EndOfDay.update);
 
  routes.post('/files', upload.single('file'), FileController.store);
 
