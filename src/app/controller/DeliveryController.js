@@ -97,10 +97,13 @@ class DeliveryController {
 
     console.log('check delete route');
 
-    delivery.destroy(req.body);
-    delivery.save();
+    if(! delivery) {
+      return res.status(400).json({ error: "This delivery man does not exist"});
+    }
 
-    return res.json(delivery);
+    delivery.destroy(req.body);
+
+    return res.json({ delete: true });
   }
 }
 

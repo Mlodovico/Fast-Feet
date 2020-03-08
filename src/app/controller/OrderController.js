@@ -60,12 +60,26 @@ class OrderController {
   }
 
   async index(req, res) {
+    const orders = await Order.findAll(
+      console.log('Check index orders routes'),
+      {
+        attributes: [ 'id', 'signature_id', 'product', 'start_date', 'end_date'],
+      }
+    )
 
-    return res.json({ ok: true });
+    return res.json(orders);
   }
 
   async delete(req, res) {
-    return res.json({ ok: true });
+    const order = await Order.findByPk(req.params.id);
+
+    if(!order) {
+
+      return res.status(400).json({ error: "Order does not exist" });
+    }
+
+    await order.destroy();
+    return res.json({ deleted: true});
   }
 }
 
