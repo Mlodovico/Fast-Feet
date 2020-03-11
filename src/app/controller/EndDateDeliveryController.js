@@ -19,7 +19,7 @@ class EndDateDeliveryController {
 
     if(! order) {
       return res.status(400).json({ 
-        error: 'Delivery not exist or has finishe'
+        error: 'Delivery not exist or has finished'
       });
     };
     

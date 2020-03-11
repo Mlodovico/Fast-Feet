@@ -9,7 +9,7 @@ import FileController from './app/controller/FileController';
 import OrderController from './app/controller/OrderController';
 import StartOfDay from './app/controller/StartDateDeliveryController';
 import EndOfDay from './app/controller/EndDateDeliveryController';
-
+import DeliveryManOrderController from './app/controller/DeliveryManOrderController';
 
 import authMiddleware from './app/middleware/auth';
 import multerConfig from './config/multer';
@@ -20,6 +20,9 @@ const upload = multer(multerConfig);
 routes.post('/sessions', SessionController.store);
 
 routes.post('/users', UserController.store);
+
+routes.get('/delivery/:id/orders', DeliveryManOrderController.index);
+routes.put('/delivery/:id/order/:orderId', DeliveryManOrderController.update);
 
 routes.use(authMiddleware);
 
