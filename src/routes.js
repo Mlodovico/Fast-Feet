@@ -10,6 +10,7 @@ import OrderController from './app/controller/OrderController';
 import StartOfDay from './app/controller/StartDateDeliveryController';
 import EndOfDay from './app/controller/EndDateDeliveryController';
 import DeliveryManOrderController from './app/controller/DeliveryManOrderController';
+import DeliveryProblemController from './app/controller/DeliveryProblemController';
 
 import authMiddleware from './app/middleware/auth';
 import multerConfig from './config/multer';
@@ -24,8 +25,10 @@ routes.post('/users', UserController.store);
 routes.get('/delivery/:id/orders', DeliveryManOrderController.index);
 routes.put('/delivery/:id/order/:orderId', DeliveryManOrderController.update);
 
-routes.use(authMiddleware);
+routes.post('/delivery/:deliveryId/problem', DeliveryProblemController.store);
+routes.get('/delivery/:id/problem', DeliveryProblemController.index);
 
+routes.use(authMiddleware);
 
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);

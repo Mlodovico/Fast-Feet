@@ -46,10 +46,6 @@ class OrderController {
       });
     }
 
-    /**
-     * Diminuir variaveis de requisição
-     */
-
     const order = await Order.create({
       recipient_id: req.body.recipient_id,
       deliveryman_id: req.body.deliveryman_id,
