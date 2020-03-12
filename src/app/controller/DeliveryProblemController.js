@@ -37,23 +37,17 @@ class DeliveryProblemController {
       return res.status(400).json({ error: "Validation Error"});
     }
 
-    /**
-     * Problems
-     */
-    
-    const deliveryId  = req.params;
+    const { deliveryId }  = req.params;
     const { description } = req.body;
 
-    const createDeliveryProblem = await DeliveryProblem.create(
-      console.log("Creating..."),
-      {
+    const createDeliveryProblems = await DeliveryProblem.create({
         delivery_id: deliveryId,
         description,
       }
     );
 
     return res.json(
-      console.log("Success"), createDeliveryProblem);
+      console.log("Success"), createDeliveryProblems);
   }
 }
 
