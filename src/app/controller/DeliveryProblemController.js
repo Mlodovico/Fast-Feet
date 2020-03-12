@@ -1,33 +1,45 @@
 import DeliveryProblem from '../models/DeliveryProblem';
 import Order from '../models/Order';
-//import Delivery from '../models/Delivery';
-//import Recipient from '../models/Recipient';
+import Delivery from '../models/Delivery';
+import Recipient from '../models/Recipient';
 
 import * as Yup from 'yup';
 
 class DeliveryProblemController {
   async index(req, res) {
-    const deliveryProblems = await DeliveryProblem.findAll(
-      console.log('Check index delivery problems routes'),
-      {
-        include: [
-          {
-            model: Order,
-            as: 'delivery',
-            attributes: [
-              'id',
-              'product',
-              'start_date',
-              'end_date',
-              'canceled_at',
-            ],
-          },
-        ],
-      }
-    );
+    const { id } = req.params;
 
-    return res.json(deliveryProblems);
+    if(id) {
+      const selectedDeliveryProblem = await DeliveryProblem.findAll({
+        where: {
+          delivery_id: id
+        },
+        attributes: [ 'id', 'description'],
+      });
+
+      return res.json(selectedDeliveryProblem);
+    }
+
+    const AllDeliveryProblems = await DeliveryProblem.findAll({
+      include: [
+        {
+          model: Order,
+          as: 'delivery',
+          attributes: [
+            'id',
+            'product',
+            'start_date',
+            'end_date',
+            'canceled_at',
+          ],
+        },
+      ],
+    });
+
+    return res.json(AllDeliveryProblems);
 }
+
+
   async store(req, res) {
     const schema = Yup.object().shape({
       description: Yup.string().required(),
@@ -46,8 +58,7 @@ class DeliveryProblemController {
       }
     );
 
-    return res.json(
-      console.log("Success"), createDeliveryProblems);
+    return res.json(createDeliveryProblems);
   }
 }
 
