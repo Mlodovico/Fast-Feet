@@ -27,6 +27,8 @@ routes.put('/delivery/:id/order/:orderId', DeliveryManOrderController.update);
 
 routes.post('/delivery/:deliveryId/problem', DeliveryProblemController.store);
 routes.get('/delivery/:id/problem', DeliveryProblemController.index);
+routes.delete('/delivery/:id/problem', DeliveryProblemController.delete);
+
 
 routes.use(authMiddleware);
 

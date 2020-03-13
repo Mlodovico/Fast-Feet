@@ -60,6 +60,17 @@ class DeliveryProblemController {
 
     return res.json(createDeliveryProblems);
   }
+
+  async delete(req, res) {
+    const deliveryProblem = await DeliveryProblem.findByPk(req.params.id);
+
+    if(! deliveryProblem) {
+      return res.status(400).json({ error: "This delivery id problem does not exist"});
+    }
+
+    await deliveryProblem.destroy();
+    return res.status(200).json({ success: "The delivery problem has beem deleted"})
+  }
 }
 
 export default new DeliveryProblemController();
