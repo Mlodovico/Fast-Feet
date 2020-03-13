@@ -62,15 +62,60 @@ class DeliveryProblemController {
   }
 
   async delete(req, res) {
-    const deliveryProblem = await DeliveryProblem.findByPk(req.params.id);
+    const { id } = req.params;
+
+    const deliveryProblem = await DeliveryProblem.findByPk(id);
 
     if(! deliveryProblem) {
       return res.status(400).json({ error: "This delivery id problem does not exist"});
     }
 
-    await deliveryProblem.destroy();
-    return res.status(200).json({ success: "The delivery problem has beem deleted"})
+    const { delivery_id } = deliveryProblem;
+
+    const order = await Order.findByPk(delivery_id, {
+      include: [
+        {
+          model: Delivery,
+          as: 'deliverys',
+        },
+        {
+          model: Recipient,
+          as: 'recipients',
+        },
+      ],
+    });
+
+    if(!order) {
+      return res.status(400).json({ error: "This order does not exist"});
+    };
+
+    if(order.canceled_at === null) {
+      return res.status(400).json({ error: "This order has been canceled"});
+    };
+
+    if(order.end_date !== null) {
+      return res.status(400).json({error: "This order has been delivered"});
+    };
+
+    const {
+      product,
+      canceled_at,
+      recipient_id,
+      deliveryman_id,
+    } = await order.update({
+      ...req.body,
+      canceled_at: new Date(),
+    });
+
+    return res.json({
+      delivery_id,
+      product,
+      canceled_at,
+      recipient_id,
+      deliveryman_id,
+    });
   }
+  
 }
 
 export default new DeliveryProblemController();
