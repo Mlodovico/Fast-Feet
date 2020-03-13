@@ -22,8 +22,8 @@ routes.post('/sessions', SessionController.store);
 
 routes.post('/users', UserController.store);
 
-routes.get('/delivery/:id/orders', DeliveryManOrderController.index);
-routes.put('/delivery/:id/order/:orderId', DeliveryManOrderController.update);
+routes.get('/delivery/:id/deliveries', DeliveryManOrderController.index);
+routes.put('/delivery/:id/deliveries/:orderId', DeliveryManOrderController.update);
 
 routes.post('/delivery/:deliveryId/problem', DeliveryProblemController.store);
 routes.get('/delivery/:id/problem', DeliveryProblemController.index);

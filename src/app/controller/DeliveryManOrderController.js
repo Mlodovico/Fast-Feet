@@ -13,7 +13,7 @@ class DeliveryManOrderController {
     const deliveryman = await Delivery.findByPk(id);
 
     if(!deliveryman) {
-      return res.status(400).json({ error:"Entregador Inexistente" });
+      return res.status(400).json({ error:"This delivery man does not exist" });
     }
 
     /**
@@ -27,16 +27,16 @@ class DeliveryManOrderController {
         include: [
           {
             model: File,
-            as: 'Signature',
+            as: 'signature',
             attributes: ['name', 'path', 'url'],
           },
           {
             model: Recipient,
-            as: 'recipient',
+            as: 'recipients',
           },
           {
             model: Delivery,
-            as: 'deliveryman',
+            as: 'deliverys',
             attributes: ['name', 'name'],
             include: [
               {
@@ -49,7 +49,7 @@ class DeliveryManOrderController {
         ],
       });
 
-      return res.json(orders);;
+      return res.json(orders);
     }
   }
   
