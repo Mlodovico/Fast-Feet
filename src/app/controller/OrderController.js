@@ -1,8 +1,11 @@
 import Order from '../models/Order';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
+import User from '../models/User';
 
+import {startOfHour, parseISO, isBefore, format} from 'date-fns';
 import * as Yup from 'yup';
+import pt from 'date-fns/locale/pt';
 
 class OrderController {
   async store(req, res) {
@@ -18,6 +21,7 @@ class OrderController {
     }
 
     const { recipient_id, deliveryman_id } = req.body;
+
     /**
      * Check if recipient_id is a recipient
      */
@@ -39,7 +43,8 @@ class OrderController {
     const isDelivery = await Delivery.findOne({
       where: { id: deliveryman_id }
     });
-    console.log(isDelivery)
+    console.log(isDelivery);
+
     if(!isDelivery) {
       return res.status(400).json({ 
         error: "This deliveryman id do not match with anyone"
@@ -52,6 +57,7 @@ class OrderController {
       product: req.body.product,
     });
 
+   
     return res.json(order);
   }
 
