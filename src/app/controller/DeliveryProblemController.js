@@ -2,6 +2,9 @@ import DeliveryProblem from '../models/DeliveryProblem';
 import Order from '../models/Order';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
+import CanceledOrderMail from '../jobs/CanceledOrderMail';
+
+import Queue from '../../lib/Queue';
 
 import * as Yup from 'yup';
 
@@ -77,10 +80,12 @@ class DeliveryProblemController {
         {
           model: Delivery,
           as: 'deliverys',
+          attributes: [ 'name' ],
         },
         {
           model: Recipient,
           as: 'recipients',
+          attributes: [ 'name' ],
         },
       ],
     });
@@ -105,6 +110,11 @@ class DeliveryProblemController {
     } = await order.update({
       ...req.body,
       canceled_at: new Date(),
+    });
+
+    await Queue.add(CanceledOrderMail.key, {
+      order,
+      deliveryProblem,
     });
 
     return res.json({

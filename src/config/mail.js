@@ -1,7 +1,7 @@
 require('dotenv/config');
 
 export default {
-  host: smtp.mailtrap.io,
+  host: 'smtp.mailtrap.io',
   port: 2525,
   secure: false,
   auth: {
