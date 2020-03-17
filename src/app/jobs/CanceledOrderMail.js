@@ -1,4 +1,4 @@
-import Mail from '../../config/mail';
+import Mail from '../../lib/Mail';
 
 class CanceledOrderMail {
   get key() {
@@ -11,12 +11,12 @@ class CanceledOrderMail {
     console.log('A fila executou');
 
     await Mail.sendMail({
-      to: `${order.delivery.name} <${order.delivery.email}>`,
+      to: `${order.deliverys.name} <${order.deliverys.email}>`,
       subject: 'Uma entrega foi cancelada',
       template: 'canceledOrder',
       context: {
         name: order.deliveryman.name,
-        recipient: order.recipient.name,
+        recipient: order.recipients.name,
         product: order.product,
         description: deliveryProblem.description,
       }

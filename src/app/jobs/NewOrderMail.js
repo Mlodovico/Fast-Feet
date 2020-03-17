@@ -15,13 +15,13 @@ class NewOrderMail {
       context: {
         deliveryman: deliveryman.name,
         product,
-        recipient: order.recipient.name,
-        street: order.recipient.street,
-        number: order.recipient.number,
-        complement: order.recipient.complement,
-        state: order.recipient.state,
-        city: order.recipient.city,
-        cep: order.recipient.cep,
+        recipient: order.recipients.name,
+        street: order.recipients.street,
+        number: order.recipients.number,
+        complement: order.recipients.complement,
+        state: order.recipients.state,
+        city: order.recipients.city,
+        postal_code: order.recipients.postal_code,
       },
     });
   }

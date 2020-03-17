@@ -5,8 +5,8 @@ export default {
   port: 2525,
   secure: false,
   auth: {
-    user: '8c964713740c78',
-    pass: 'bc4a1aee7b9ba6',
+    user: 'c0ca6560b59fb7',
+    pass: '18f7ffbe0d543d',
   },
   default: {
     from: 'Team FastFeet <noreply@fastfeet.com>',

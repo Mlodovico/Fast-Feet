@@ -79,7 +79,7 @@ class DeliveryProblemController {
       include: [
         {
           model: Delivery,
-          as: 'deliverys',
+          as: 'deliveryman',
           attributes: [ 'name' ],
         },
         {
@@ -111,6 +111,10 @@ class DeliveryProblemController {
       ...req.body,
       canceled_at: new Date(),
     });
+
+    /**
+     * Não está retornando o destinatário(recipient.name) pq?
+     */
 
     await Queue.add(CanceledOrderMail.key, {
       order,
