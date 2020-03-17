@@ -81,13 +81,16 @@ class OrderController {
   }
 
   async index(req, res) {
+    const { query } = req.query;
+    const name = query || '';
+
     const orders = await Order.findAndCountAll({
       where: {
         product: { [Op.iLike]: `%${name}%`},
       },
       include: [{
         model:File,
-        as: 'signature',
+        as: 'files',
         attributes: [ 'name', 'path', 'url'],
       },
       {
