@@ -28,28 +28,40 @@ class DeliveryController {
     });
 
     if(deliveryExist) {
-      return res.status(400).json({ error: 'Delivery already exist' });
+      return res.status(400).json({ error: 'Delivery man already exist' });
     }
 
-    const { id, name, email } = await Delivery.create(req.body);
+    /**
+     * Autentication by the avatar_id 
+    **/
+//
+//    const fileExist = await File.findOne({
+//      where: { id: req.body.avatar_id }
+//    });
+//
+//    if(!fileExist) {
+//      return res.status(400).json({ error: 'File does not exist' });
+//    }
+//
+    const { id, name, email, avatar_id } = await Delivery.create(req.body);
 
     return res.json({
       id,
       name,
       email,
+      avatar_id,
     });
   }
 
   async index(req, res) {
     const deliverys = await Delivery.findAll(
-      console.log('Check index deliverys routes'),
       {
       attributes: [ 'id', 'name', 'email', 'avatar_id' ],
       include: [
          {
          model: File,
          as: 'avatar',
-         attributes: [ 'name', 'path', 'url' ],
+         attributes: [ 'name', 'path' ],
         }
       ]
     });

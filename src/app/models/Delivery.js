@@ -6,7 +6,6 @@ class Delivery extends Model{
       {
         name: Sequelize.STRING,
         email:Sequelize.STRING,
-        avatar_id: Sequelize.INTEGER,
       },
       {
         sequelize,
